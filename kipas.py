@@ -25,16 +25,14 @@ rule3 = ctrl.Rule(suhu['panas'] & kelembapan['basah'], kecepatan['cepat'])
 kipas_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
 kipas_simulasi = ctrl.ControlSystemSimulation(kipas_ctrl)
 
-suhu_input = 32
-kelembapan_input = 80
-
-print("=== Simulasi Sistem Logika Fuzzy Kecepatan Kipas ===")
-print(f"Input Suhu Lingkungan  : {suhu_input} °C")
-print(f"Input Kelembapan       : {kelembapan_input} %")
+print("Input Sistem Logika Fuzzy Kecepatan Kipas")
+suhu_input = float(input("Masukkan nilai Suhu (0-40 °C)       : "))
+kelembapan_input = float(input("Masukkan nilai Kelembapan (0-100 %) : "))
 
 kipas_simulasi.input['suhu'] = suhu_input
 kipas_simulasi.input['kelembapan'] = kelembapan_input
 
 kipas_simulasi.compute()
 
+print("\nHasil Simulasi")
 print(f"Output Kecepatan Kipas : {kipas_simulasi.output['kecepatan']:.2f} (Skala 0-100)")
